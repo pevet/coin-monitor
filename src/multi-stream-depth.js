@@ -12,11 +12,11 @@ export default async function createApp() {
     'bnbbtc',
   ];
 
-  pairs = pairs.map((pair) => `${pair}@depth5`).join('/');
+  pairs = pairs.map((pair) => `${pair}@ticker`).join('/');
   logger.info(pairs);
 
   const socketApi = new SocketClient(`stream?streams=${pairs}`);
-  socketApi.setHandler('depthUpdate', (params) => logger.info(JSON.stringify(params)));
+  socketApi.setHandler('24hrTicker', (params) => logger.info(JSON.stringify(params)));
 }
 
 createApp();

@@ -35,7 +35,8 @@ class SocketClient {
 
     this._ws.onmessage = (msg) => {
       try {
-        const message = JSON.parse(msg.data);
+        const payload = JSON.parse(msg.data);
+        const message = payload.data;
         if (message.e) {
           if (this._handlers.has(message.e)) {
             this._handlers.get(message.e).forEach((cb) => {
@@ -45,7 +46,7 @@ class SocketClient {
             logger.warn('Unprocessed method', message);
           }
         } else {
-          logger.warn('Unprocessed method', message);
+          logger.warn('Unknown method', message);
         }
       } catch (e) {
         logger.warn('Parse message failed', e);

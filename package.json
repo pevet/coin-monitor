@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.21.4",
     "big.js": "^5.2.2",
+    "mysql": "^2.18.1",
     "ramda": "^0.26.1",
     "ws": "^7.4.6"
   },
@@ -29,7 +30,7 @@
     "margin-user": "nodemon -w ./src --exec babel-node ./src/margin-user.js",
     "futures-user": "nodemon -w ./src --exec babel-node ./src/futures-user.js",
     "delivery-futures-user": "nodemon -w ./src --exec babel-node ./src/delivery-futures-user.js",
-    "multi-stream": "nodemon -w ./src --exec babel-node ./src/multi-stream-depth.js",
+    "coinmonitor": "nodemon -w ./src --exec babel-node ./src/multi-stream-depth.js",
     "monitor-spot-depth": "nodemon -w ./src --exec babel-node ./src/spot/monitor-depth.js",
     "monitor-spot-trade": "nodemon -w ./src --exec babel-node ./src/spot/monitor-trade.js",
     "monitor-futures": "nodemon -w ./src --exec babel-node ./src/monitor-futures.js",

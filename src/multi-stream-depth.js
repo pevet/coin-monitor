@@ -42,7 +42,7 @@ db.query(sql, function (err, result) {
   if (err) throw err;
   pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
   pairs = pairs.toLowerCase();
-  logger.debug("Pairs: "+typeof(pairs);
+  logger.debug(typeof pairs);
 });
 
 //pairs="btcusdt@ticker/ethusdt@ticker";

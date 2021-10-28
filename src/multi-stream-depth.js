@@ -39,8 +39,9 @@ db.connect(function(err) {
 var sql = "SELECT symbol FROM pairs WHERE active = 1";
 db.query(sql, function (err, result) {
   if (err) throw err;
-  logger.debug(result);
+  logger.debug(array.from(result));
 });
+
 
 let pairs = [
   'ethbtc',

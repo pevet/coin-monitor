@@ -33,7 +33,7 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "coinmonitor",
   password: "%[9n6$-?+/fL.UH]",
-  database: "CoinScanner"
+  database: "coinscanner"
 });
 
 con.connect(function(err) {

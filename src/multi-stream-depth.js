@@ -17,6 +17,7 @@ console.log = function () {
 console.error = console.log;
 
 var mysql = require('mysql');
+var db;
 
 export default async function createApp() {
   logger.info('Start application');
@@ -29,14 +30,14 @@ export default async function createApp() {
 
 let msgType='24hrTicker';
 
-var con = mysql.createConnection({
+db = mysql.createConnection({
   host: "localhost",
   user: "coinmonitor",
   password: "%[9n6$-?+/fL.UH]",
   database: "coinscanner"
 });
 
-con.connect(function(err) {
+db.connect(function(err) {
   if (err) throw err;
   logger.debug("Database Connected!");
 });
@@ -63,7 +64,7 @@ function subscribeToStream(pairs, msgType) {
 
 function storeTicker(params) {
   var sql = "INSERT INTO ticker (symbol, price, time) VALUES ('"+params.s+"', '"+params.c+"', '"+params.E+"')";
-  con.query(sql, function (err, result) {
+  db.query(sql, function (err, result) {
     if (err) throw err;
     logger.info("Inserted: "+sql);
   });

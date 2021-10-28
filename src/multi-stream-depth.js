@@ -44,7 +44,7 @@ db.query(sql, function (err, result) {
   logger.debug("Pairs: "+pairs);
 });
 
-pairs="btcusdt@ticker";
+pairs="btcusdt@ticker/ethusdt@ticker";
 
 //let pairs = [
 //  'ethbtc',

@@ -40,11 +40,12 @@ var pairs;
 var sql = "SELECT symbol FROM pairs WHERE active = 1";
 db.query(sql, function (err, result) {
   if (err) throw err;
-  pairs = result.map((row) => `${row.symbol.toLowerCase()}@ticker`).join('/');
+  pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
+  pairs = pairs.toLowerCase(pairs);
   logger.debug("Pairs: "+pairs);
 });
 
-pairs="btcusdt@ticker/ethusdt@ticker";
+//pairs="btcusdt@ticker/ethusdt@ticker";
 
 //let pairs = [
 //  'ethbtc',

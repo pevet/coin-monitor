@@ -72,6 +72,7 @@ function subscribeToStream(pairs, msgType) {
 }
 
 function storeTicker(params) {
+  logger.debug(params);
   var sql = "INSERT INTO ticker (symbol, price, time) VALUES ('"+params.s+"', '"+params.c+"', '"+params.E+"')";
   db.query(sql, function (err, result) {
     if (err) throw err;

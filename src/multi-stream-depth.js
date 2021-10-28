@@ -31,7 +31,7 @@ let msgType='24hrTicker';
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "coinexpert",
+  user: "coinmonitor",
   password: "%[9n6$-?+/fL.UH]",
   database: "CoinScanner"
 });

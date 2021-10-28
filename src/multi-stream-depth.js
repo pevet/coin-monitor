@@ -36,7 +36,7 @@ db.connect(function(err) {
   logger.debug("Database Connected!");
 });
 
-var sql = "SELECT symbol FROM pairs WHERE valid = 1";
+var sql = "SELECT symbol FROM pairs WHERE active = 1";
 db.query(sql, function (err, result) {
   if (err) throw err;
   logger.debug(result);

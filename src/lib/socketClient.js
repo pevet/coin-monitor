@@ -14,7 +14,7 @@ class SocketClient {
     this._ws = new WebSocket(`${this.baseUrl}${this._path}`);
 
     this._ws.onopen = () => {
-      logger.info('ws connected');
+      logger.debug('ws connected');
     };
 
     this._ws.on('pong', () => {

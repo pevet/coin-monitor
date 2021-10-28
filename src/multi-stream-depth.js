@@ -36,10 +36,11 @@ db.connect(function(err) {
   logger.debug("Database Connected!");
 });
 
+var pairs;
 var sql = "SELECT symbol FROM pairs WHERE active = 1";
 db.query(sql, function (err, result) {
   if (err) throw err;
-  let pairs = result.map((row) => `${row.RowDataPacket.symbol}@ticker`).join('/');
+  pairs = result.map((row) => `${row.RowDataPacket.symbol}@ticker`).join('/');
   logger.debug(pairs);
 });
 

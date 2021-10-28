@@ -41,7 +41,7 @@ var sql = "SELECT symbol FROM pairs WHERE active = 1";
 db.query(sql, function (err, result) {
   if (err) throw err;
   pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
-  logger.debug(pairs);
+  logger.debug("Pairs: "+pairs);
 });
 
 

@@ -22,12 +22,6 @@ var db;
 export default async function createApp() {
   logger.info('Start application');
 
-  let pairs = [
-    'ethbtc',
-    'ltcbtc',
-    'bnbbtc',
-  ];
-
 let msgType='24hrTicker';
 
 db = mysql.createConnection({
@@ -41,6 +35,18 @@ db.connect(function(err) {
   if (err) throw err;
   logger.debug("Database Connected!");
 });
+
+var sql = "SELECT symbol FROM pairs WHERE valid = 1";
+db.query(sql, function (err, result) {
+  if (err) throw err;
+  logger.debug(result);
+});
+
+let pairs = [
+  'ethbtc',
+  'ltcbtc',
+  'bnbbtc',
+];
 
   pairs = pairs.map((pair) => `${pair}@ticker`).join('/');
   logger.info(pairs);

@@ -39,18 +39,19 @@ db.connect(function(err) {
 var sql = "SELECT symbol FROM pairs WHERE active = 1";
 db.query(sql, function (err, result) {
   if (err) throw err;
-  logger.debug(array.from(result));
+  let pairs = result.map((row) => `${row.RowDataPacket.symbol}@ticker`).join('/');
+  logger.debug(pairs);
 });
 
 
-let pairs = [
-  'ethbtc',
-  'ltcbtc',
-  'bnbbtc',
-];
+//let pairs = [
+//  'ethbtc',
+//  'ltcbtc',
+//  'bnbbtc',
+//];
 
-  pairs = pairs.map((pair) => `${pair}@ticker`).join('/');
-  logger.info(pairs);
+//  pairs = pairs.map((pair) => `${pair}@ticker`).join('/');
+//  logger.info(pairs);
 
   var socketApi = subscribeToStream(pairs,msgType);
 

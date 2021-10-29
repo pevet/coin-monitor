@@ -39,7 +39,7 @@ export default async function createApp() {
 
       pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
       pairs = pairs.toLowerCase();
-      logger.debug("5#"+pairs+"#");
+//      logger.debug("5#"+pairs+"#");
 
       socketApi = subscribeToStream(pairs,msgType);
 

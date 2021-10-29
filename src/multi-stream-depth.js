@@ -16,21 +16,20 @@ console.log = function () {
 }
 console.error = console.log;
 
-var mysql = require('mysql');
-var db;
+let mysql = require('mysql');
 
 export default async function createApp() {
   let msgType='24hrTicker';
   logger.debug('Start application for '+msgType);
 
-db = mysql.createConnection({
+let db = await mysql.createConnection({
   host: "localhost",
   user: "coinmonitor",
   password: "%[9n6$-?+/fL.UH]",
   database: "coinscanner"
 });
 
-db.connect(function(err) {
+let con = await db.connect(function(err) {
   if (err) throw err;
   logger.debug("Database Connected!");
 });

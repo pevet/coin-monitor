@@ -38,6 +38,7 @@ var values = await Promise.all([con]);
 
 let pairs = await getPairs(db);
 values = await Promise.all([pairs]);
+pairs = values[0];
 logger.debug("1#"+pairs+"#");
 
 

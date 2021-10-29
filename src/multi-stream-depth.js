@@ -18,47 +18,41 @@ console.error = console.log;
 
 let mysql = require('mysql');
 
-export default function createApp() {
+export default async function createApp() {
   let msgType='24hrTicker';
   logger.debug('Start application for '+msgType);
 
-let db = mysql.createConnection({
-  host: "localhost",
-  user: "coinmonitor",
-  password: "%[9n6$-?+/fL.UH]",
-  database: "coinscanner"
-});
+  let db = mysql.createConnection({
+    host: "localhost",
+    user: "coinmonitor",
+    password: "%[9n6$-?+/fL.UH]",
+    database: "coinscanner"
+  });
 
-db.connect(function(err) {
-  if (err) throw err;
-  logger.debug("Database Connected!");
-});
+  var pairs;
+  var socketApi;
+  db.connect(function(err) {
+    if (err) throw err;
+    logger.debug("Database Connected!");
 
+    var sql = "SELECT symbol FROM pairs WHERE active = 1";
+    db.query(sql, function (err, result) {
+      if (err) throw err;
 
-let pairs = getPairs(db);
-logger.debug("0#"+pairs+"#");
+      pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
+      pairs = pairs.toLowerCase();
+      logger.debug("5#"+pairs+"#");
 
-
-//pairs="btcusdt@ticker/ethusdt@ticker";
-
-let pairs2 = [
-  'btcusdt',
-  'ethusdt',
-//  'bnbbtc',
-];
-
-  pairs2 = pairs2.map((pair) => `${pair}@ticker`).join('/');
-  logger.debug("2*"+pairs2+"*");
-
-  var socketApi = subscribeToStream(pairs,msgType);
-  logger.debug("3#"+pairs+"#");
-
-  setInterval(() => {
-    if (socketApi._ws.readyState === WebSocket.CLOSED) {
-      logger.debug("Websocket is closed, trying to resubscribe");
       socketApi = subscribeToStream(pairs,msgType);
-    }
-  }, 2000);
+
+      setInterval(() => {
+        if (socketApi._ws.readyState === WebSocket.CLOSED) {
+          logger.debug("Websocket is closed, trying to resubscribe");
+          socketApi = subscribeToStream(pairs,msgType);
+        }
+      }, 2000);
+    });
+  });
 }
 
 function subscribeToStream(pairs, msgType) {

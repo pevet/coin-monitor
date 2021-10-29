@@ -42,7 +42,7 @@ db.query(sql, function (err, result) {
   if (err) throw err;
   pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
   pairs = pairs.toLowerCase();
-  logger.debug("#"+pairs+"#");
+  logger.debug("1#"+pairs+"#");
 });
 
 //pairs="btcusdt@ticker/ethusdt@ticker";
@@ -54,10 +54,10 @@ let pairs2 = [
 ];
 
   pairs2 = pairs2.map((pair) => `${pair}@ticker`).join('/');
-  logger.debug("*"+pairs2+"*");
+  logger.debug("2*"+pairs2+"*");
 
   var socketApi = subscribeToStream(pairs,msgType);
-  logger.debug("#"+pairs+"#");
+  logger.debug("3#"+pairs+"#");
 
   setInterval(() => {
     if (socketApi._ws.readyState === WebSocket.CLOSED) {

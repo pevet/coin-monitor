@@ -18,7 +18,7 @@ console.error = console.log;
 
 let mysql = require('mysql');
 
-export default function createApp() {
+export default asynch function createApp() {
   let msgType='24hrTicker';
   logger.debug('Start application for '+msgType);
 

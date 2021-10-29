@@ -47,14 +47,14 @@ db.query(sql, function (err, result) {
 
 //pairs="btcusdt@ticker/ethusdt@ticker";
 
-//let pairs = [
-//  'ethbtc',
-//  'ltcbtc',
+let pairs2 = [
+  'btcusdt',
+  'ethusdt',
 //  'bnbbtc',
-//];
+];
 
-//  pairs = pairs.map((pair) => `${pair}@ticker`).join('/');
-//  logger.info(pairs);
+  pairs2 = pairs2.map((pair) => `${pair}@ticker`).join('/');
+  logger.debug("*"+pairs+"*");
 
   var socketApi = subscribeToStream(pairs,msgType);
 

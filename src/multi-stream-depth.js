@@ -22,19 +22,19 @@ export default function createApp() {
   let msgType='24hrTicker';
   logger.debug('Start application for '+msgType);
 
-let db = mysql.createConnection({
+let db = await mysql.createConnection({
   host: "localhost",
   user: "coinmonitor",
   password: "%[9n6$-?+/fL.UH]",
   database: "coinscanner"
 });
 
-db.connect(function(err) {
+let con = await db.connect(function(err) {
   if (err) throw err;
   logger.debug("Database Connected!");
 });
 
-let pairs = getPairs(db);
+let pairs = await getPairs(db);
 logger.debug("1#"+pairs+"#");
 
 
@@ -49,7 +49,7 @@ let pairs2 = [
   pairs2 = pairs2.map((pair) => `${pair}@ticker`).join('/');
   logger.debug("2*"+pairs2+"*");
 
-  var socketApi = subscribeToStream(pairs,msgType);
+  var socketApi = await subscribeToStream(pairs,msgType);
   logger.debug("3#"+pairs+"#");
 
   setInterval(() => {

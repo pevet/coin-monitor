@@ -57,6 +57,7 @@ let pairs2 = [
   logger.debug("*"+pairs2+"*");
 
   var socketApi = subscribeToStream(pairs,msgType);
+  logger.debug("#"+pairs+"#");
 
   setInterval(() => {
     if (socketApi._ws.readyState === WebSocket.CLOSED) {
@@ -69,7 +70,7 @@ let pairs2 = [
 function subscribeToStream(pairs, msgType) {
   const socketApi = new SocketClient(`stream?streams=${pairs}`);
   socketApi.setHandler(msgType, (params) => storeTicker(params));
-  logger.debug("subscribed to stream");
+  logger.debug("subscribed to stream "+pairs);
   return socketApi;
 }
 

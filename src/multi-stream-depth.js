@@ -35,19 +35,8 @@ db.connect(function(err) {
   logger.debug("Database Connected!");
 });
 
-var pairs;
-var sql = "SELECT symbol FROM pairs WHERE active = 1";
-db.query(sql, function (err, result) {
-  if (err) throw err;
-  pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
-  pairs = pairs.toLowerCase();
-  logger.debug("1#"+pairs+"#");
-});
+let pairs = await getPairs(db);
 
-do {
-  //wait for the sql query to finish
-  logger.debug("waiting...pairs="+pairs);
-} while (pairs == null);
 
 //pairs="btcusdt@ticker/ethusdt@ticker";
 
@@ -85,6 +74,20 @@ function storeTicker(params) {
     if (err) throw err;
     logger.info("Inserted: "+sql);
   });
+}
+
+function getPairs(db) {
+  var sql = "SELECT symbol FROM pairs WHERE active = 1";
+  var pairs;
+  
+  db.query(sql, function (err, result) {
+    if (err) throw err;
+    pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
+    pairs = pairs.toLowerCase();
+    logger.debug("1#"+pairs+"#");
+  });
+
+  return pairs;
 }
 
 createApp();

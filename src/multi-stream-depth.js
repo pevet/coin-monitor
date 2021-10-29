@@ -39,7 +39,7 @@ var values = await Promise.all([con]);
 let pairs = await getPairs(db);
 values = await Promise.all([pairs]);
 pairs = values[0];
-logger.debug("1#"+pairs+"#");
+logger.debug("0#"+pairs+"#");
 
 
 //pairs="btcusdt@ticker/ethusdt@ticker";
@@ -88,9 +88,9 @@ function getPairs(db) {
     if (err) throw err;
     pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
     pairs = pairs.toLowerCase();
-    logger.debug("1#"+pairs+"#");
+    logger.debug("5#"+pairs+"#");
   });
-  logger.debug("0#"+pairs+"#");
+  logger.debug("6#"+pairs+"#");
   return pairs;
 }
 

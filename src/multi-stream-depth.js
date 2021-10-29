@@ -56,7 +56,7 @@ export default async function createApp() {
 function subscribeToStream(pairs, msgType) {
   const socketApi = new SocketClient(`stream?streams=${pairs}`);
   socketApi.setHandler(msgType, (params) => storeTicker(params));
-  logger.debug("subscribed to stream "+pairs);
+  logger.debug("subscribed to stream");
   return socketApi;
 }
 

@@ -34,10 +34,10 @@ let con = await db.connect(function(err) {
   logger.debug("Database Connected!");
 });
 
-let values = await Promise.all([con]);
+var values = await Promise.all([con]);
 
 let pairs = await getPairs(db);
-let values = await Promise.all([pairs]);
+values = await Promise.all([pairs]);
 logger.debug("1#"+pairs+"#");
 
 

@@ -17,18 +17,16 @@ console.log = function () {
 console.error = console.log;
 
 let mysql = require('mysql');
+let db = mysql.createConnection({
+  host: "localhost",
+  user: "coinmonitor",
+  password: "%[9n6$-?+/fL.UH]",
+  database: "coinscanner"
+});
 
 export default async function createApp() {
   let msgType='24hrTicker';
   logger.debug('Start application for '+msgType);
-
-  let db = mysql.createConnection({
-    host: "localhost",
-    user: "coinmonitor",
-    password: "%[9n6$-?+/fL.UH]",
-    database: "coinscanner"
-  });
-
   var pairs;
   var socketApi;
   db.connect(function(err) {
@@ -55,34 +53,20 @@ export default async function createApp() {
   });
 }
 
-function subscribeToStream(db, pairs, msgType) {
+function subscribeToStream(pairs, msgType) {
   const socketApi = new SocketClient(`stream?streams=${pairs}`);
-  socketApi.setHandler(msgType, (params) => storeTicker(db, params));
+  socketApi.setHandler(msgType, (params) => storeTicker(params));
   logger.debug("subscribed to stream "+pairs);
   return socketApi;
 }
 
-function storeTicker(db, params) {
+function storeTicker(params) {
   logger.debug(params);
   var sql = "INSERT INTO ticker (symbol, price, time) VALUES ('"+params.s+"', '"+params.c+"', '"+params.E+"')";
   db.query(sql, function (err, result) {
     if (err) throw err;
     logger.info("Inserted: "+sql);
   });
-}
-
-function getPairs(db) {
-  var sql = "SELECT symbol FROM pairs WHERE active = 1";
-  var pairs;
-
-  db.query(sql, function (err, result) {
-    if (err) throw err;
-    pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
-    pairs = pairs.toLowerCase();
-    logger.debug("5#"+pairs+"#");
-  });
-  logger.debug("6#"+pairs+"#");
-  return pairs;
 }
 
 createApp();

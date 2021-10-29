@@ -36,6 +36,7 @@ db.connect(function(err) {
 });
 
 let pairs = await getPairs(db);
+logger.debug("1#"+pairs+"#");
 
 
 //pairs="btcusdt@ticker/ethusdt@ticker";
@@ -79,7 +80,7 @@ function storeTicker(params) {
 function getPairs(db) {
   var sql = "SELECT symbol FROM pairs WHERE active = 1";
   var pairs;
-  
+
   db.query(sql, function (err, result) {
     if (err) throw err;
     pairs = result.map((row) => `${row.symbol}@ticker`).join('/');

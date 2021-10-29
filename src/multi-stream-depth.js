@@ -55,14 +55,14 @@ export default async function createApp() {
   });
 }
 
-function subscribeToStream(pairs, msgType) {
+function subscribeToStream(db, pairs, msgType) {
   const socketApi = new SocketClient(`stream?streams=${pairs}`);
-  socketApi.setHandler(msgType, (params) => storeTicker(params));
+  socketApi.setHandler(msgType, (params) => storeTicker(db, params));
   logger.debug("subscribed to stream "+pairs);
   return socketApi;
 }
 
-function storeTicker(params) {
+function storeTicker(db, params) {
   logger.debug(params);
   var sql = "INSERT INTO ticker (symbol, price, time) VALUES ('"+params.s+"', '"+params.c+"', '"+params.E+"')";
   db.query(sql, function (err, result) {

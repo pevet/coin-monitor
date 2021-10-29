@@ -18,27 +18,24 @@ console.error = console.log;
 
 let mysql = require('mysql');
 
-export default async function createApp() {
+export default function createApp() {
   let msgType='24hrTicker';
   logger.debug('Start application for '+msgType);
 
-let db = await mysql.createConnection({
+let db = mysql.createConnection({
   host: "localhost",
   user: "coinmonitor",
   password: "%[9n6$-?+/fL.UH]",
   database: "coinscanner"
 });
 
-let con = await db.connect(function(err) {
+db.connect(function(err) {
   if (err) throw err;
   logger.debug("Database Connected!");
 });
 
-var values = await Promise.all([con]);
 
-let pairs = await getPairs(db);
-values = await Promise.all([pairs]);
-pairs = values[0];
+let pairs = getPairs(db);
 logger.debug("0#"+pairs+"#");
 
 
@@ -53,7 +50,7 @@ let pairs2 = [
   pairs2 = pairs2.map((pair) => `${pair}@ticker`).join('/');
   logger.debug("2*"+pairs2+"*");
 
-  var socketApi = await subscribeToStream(pairs,msgType);
+  var socketApi = subscribeToStream(pairs,msgType);
   logger.debug("3#"+pairs+"#");
 
   setInterval(() => {

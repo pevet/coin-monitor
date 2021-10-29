@@ -46,7 +46,7 @@ db.query(sql, function (err, result) {
 
 do {
   //wait for the sql query to finish
-} while (pairs -- null);
+} while (pairs == null);
 
 //pairs="btcusdt@ticker/ethusdt@ticker";
 

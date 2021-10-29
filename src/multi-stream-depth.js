@@ -18,23 +18,23 @@ console.error = console.log;
 
 let mysql = require('mysql');
 
-export default async function createApp() {
+export default function createApp() {
   let msgType='24hrTicker';
   logger.debug('Start application for '+msgType);
 
-let db = await mysql.createConnection({
+let db = mysql.createConnection({
   host: "localhost",
   user: "coinmonitor",
   password: "%[9n6$-?+/fL.UH]",
   database: "coinscanner"
 });
 
-let con = await db.connect(function(err) {
+db.connect(function(err) {
   if (err) throw err;
   logger.debug("Database Connected!");
 });
 
-let pairs = await getPairs(db);
+let pairs = getPairs(db);
 logger.debug("1#"+pairs+"#");
 
 

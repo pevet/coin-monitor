@@ -54,7 +54,7 @@ let pairs2 = [
 ];
 
   pairs2 = pairs2.map((pair) => `${pair}@ticker`).join('/');
-  logger.debug("*"+pairs+"*");
+  logger.debug("*"+pairs2+"*");
 
   var socketApi = subscribeToStream(pairs,msgType);
 

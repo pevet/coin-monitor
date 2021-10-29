@@ -20,9 +20,8 @@ var mysql = require('mysql');
 var db;
 
 export default async function createApp() {
-  logger.info('Start application');
-
-let msgType='24hrTicker';
+  let msgType='24hrTicker';
+  logger.debug('Start application for '+msgType);
 
 db = mysql.createConnection({
   host: "localhost",
@@ -44,6 +43,10 @@ db.query(sql, function (err, result) {
   pairs = pairs.toLowerCase();
   logger.debug("1#"+pairs+"#");
 });
+
+do {
+  //wait for the sql query to finish
+} while (!pairs)
 
 //pairs="btcusdt@ticker/ethusdt@ticker";
 

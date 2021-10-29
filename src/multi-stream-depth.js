@@ -87,7 +87,7 @@ function getPairs(db) {
     pairs = pairs.toLowerCase();
     logger.debug("1#"+pairs+"#");
   });
-
+  logger.debug("0#"+pairs+"#");
   return pairs;
 }
 

@@ -33,7 +33,7 @@
     "coinmonitor": "nodemon -w ./src --exec babel-node ./src/multi-stream-depth.js",
     "monitor-spot-depth": "nodemon -w ./src --exec babel-node ./src/spot/monitor-depth.js",
     "monitor-spot-trade": "nodemon -w ./src --exec babel-node ./src/spot/monitor-trade.js",
-    "coinscanner": "nodemon -w ./src --exec babel-node ./src/monitor-futures.js",
+    "monitor-futures": "nodemon -w ./src --exec babel-node ./src/monitor-futures.js",
     "start": "nodemon -w ./src --exec babel-node ./src/index.js",
     "delivery": "nodemon -w ./src --exec babel-node ./src/delivery.js",
     "build": "babel src -d dist",

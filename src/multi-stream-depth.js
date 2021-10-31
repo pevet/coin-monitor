@@ -49,6 +49,11 @@ export default async function createApp() {
           socketApi = subscribeToStream(pairs,msgType);
         }
       }, 2000);
+
+      setInterval(() => {
+        logger.debug("Closing stream");
+        socketApi._ws.close();
+      }, 60*1000);
     });
   });
 }
@@ -61,7 +66,7 @@ function subscribeToStream(pairs, msgType) {
 }
 
 function storeTicker(params) {
-  logger.debug(params);
+  logger.info(params);
   var sql = "INSERT INTO ticker (symbol, price, time) VALUES ('"+params.s+"', '"+params.c+"', '"+params.E+"')";
   db.query(sql, function (err, result) {
     if (err) {

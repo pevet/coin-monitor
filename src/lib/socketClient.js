@@ -10,7 +10,7 @@ class SocketClient {
   }
 
   _createSocket() {
-    console.log(`${this.baseUrl}${this._path}`);
+    logger.debug("Trying to subscribe to "+`${this.baseUrl}${this._path}`);
     this._ws = new WebSocket(`${this.baseUrl}${this._path}`);
 
     this._ws.onopen = () => {

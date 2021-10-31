@@ -53,7 +53,7 @@ export default async function createApp() {
       setInterval(() => { //each 12hrs force closing the stream and re-subscribe to keep stream alive
         logger.debug("Closing stream");
         socketApi._ws.close();
-      }, 12*60*60*1000);
+      }, 60*1000);
     });
   });
 }

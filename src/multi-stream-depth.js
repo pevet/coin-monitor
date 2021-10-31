@@ -50,10 +50,10 @@ export default async function createApp() {
         }
       }, 2000);
 
-      setInterval(() => {
+      setInterval(() => { //each 12hrs force closing the stream and re-subscribe to keep stream alive
         logger.debug("Closing stream");
         socketApi._ws.close();
-      }, 60*1000);
+      }, 12*60*60*1000);
     });
   });
 }
@@ -70,7 +70,11 @@ function storeTicker(params) {
   var sql = "INSERT INTO ticker (symbol, price, time) VALUES ('"+params.s+"', '"+params.c+"', '"+params.E+"')";
   db.query(sql, function (err, result) {
     if (err) {
-      if (err.errno != 1062) throw err; //ignore duplicate entry error due to async execution
+      if (err.errno == 1062) { //ignore duplicate entry error due to async execution
+        logger.warn("Duplicate record "+symbol+"@"+price+" "+time);
+      } else {
+        throw err;
+      }
     }
     logger.info("Inserted: "+sql);
   });

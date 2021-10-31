@@ -70,7 +70,9 @@ function storeTicker(params) {
   var sql = "INSERT INTO ticker (symbol, price, time) VALUES ('"+params.s+"', '"+params.c+"', '"+params.E+"')";
   db.query(sql, function (err, result) {
     if (err) {
-      if (err.errno != 1062) throw err;
+      if (err.errno == 1062) { //ignore duplicate entry error due to async execution
+        logger.warn("Duplicate record "+params.s+"@"+params.c+":"+params.E);
+      } else throw err;
     }
     logger.info("Inserted: "+sql);
   });

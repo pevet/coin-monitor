@@ -33,7 +33,7 @@ export default async function createApp() {
   logger.debug("Database Connected!");
 
   var sql = "SELECT symbol FROM pairs WHERE active = 1";
-  var result = db.query(sql;
+  var result = db.query(sql);
 
   pairs = result.map((row) => `${row.symbol}@ticker`).join('/');
   pairs = pairs.toLowerCase();

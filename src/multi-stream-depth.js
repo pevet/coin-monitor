@@ -34,7 +34,7 @@ db.connect(function(err) {
   if (err) throw err;
   logger.debug("Database Connected!");
 
-  var sql = "SELECT symbol FROM pairs WHERE active = 1 LIMIT=100";
+  var sql = "SELECT symbol FROM pairs WHERE active = 1 LIMIT 100";
   db.query(sql, function (err, result) {
     if (err) throw err;
 

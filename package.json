@@ -30,7 +30,7 @@
     "margin-user": "nodemon -w ./src --exec babel-node ./src/margin-user.js",
     "futures-user": "nodemon -w ./src --exec babel-node ./src/futures-user.js",
     "delivery-futures-user": "nodemon -w ./src --exec babel-node ./src/delivery-futures-user.js",
-    "coinmonitor": "nodemon -w ./src --exec babel-node --max-old-space-size=300 ./src/multi-stream-depth.js",
+    "coinmonitor": "nodemon -w ./src --exec babel-node --max-old-space-size=100 ./src/multi-stream-depth.js",
     "monitor-spot-depth": "nodemon -w ./src --exec babel-node ./src/spot/monitor-depth.js",
     "monitor-spot-trade": "nodemon -w ./src --exec babel-node ./src/spot/monitor-trade.js",
     "monitor-futures": "nodemon -w ./src --exec babel-node ./src/monitor-futures.js",

@@ -16,7 +16,7 @@ console.log = function () {
 }
 console.error = console.log;
 
-//showMemory();
+showMemory();
 
 let mysql = require('mysql');
 let db = mysql.createConnection({

@@ -16,6 +16,8 @@ console.log = function () {
 }
 console.error = console.log;
 
+showMemmory();
+
 let mysql = require('mysql');
 let db = mysql.createConnection({
   host: "localhost",
@@ -73,5 +75,13 @@ function storeTicker(params) {
       } else throw err;
     }
     logger.info("Inserted: "+sql);
+    showMemory();
   });
 };
+
+function showMemory(){
+  const used = process.memoryUsage();
+  for (let key in used) {
+    logger.debug(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
+  }
+}

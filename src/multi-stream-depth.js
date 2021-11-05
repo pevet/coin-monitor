@@ -16,7 +16,7 @@ console.log = function () {
 }
 console.error = console.log;
 
-showMemory();
+//showMemory();
 
 let mysql = require('mysql');
 let db = mysql.createConnection({
@@ -34,7 +34,7 @@ db.connect(function(err) {
   if (err) throw err;
   logger.debug("Database Connected!");
 
-  var sql = "SELECT symbol FROM pairs WHERE active = 1";
+  var sql = "SELECT symbol FROM pairs WHERE active = 1 LIMIT=100";
   db.query(sql, function (err, result) {
     if (err) throw err;
 
